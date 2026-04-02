@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Review | Infinite Cafe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #967E76;
+            --bg: #FDFCF8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--primary); line-height: 1.6; }
+
+        nav { padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #eee; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; text-decoration: none; color: black; font-weight: bold; }
+
+        .contact-container { width: 85%; margin: 60px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+
+        /* LEFT SIDE: INFO */
+        .info-side h2 { font-family: 'Playfair Display'; font-size: 2.5rem; margin-bottom: 30px; }
+        .info-item { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 25px; }
+        .info-item i { color: var(--accent); font-size: 1.5rem; margin-top: 5px; }
+        .info-item h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .info-item p { color: #666; }
+
+        /* RIGHT SIDE: REVIEW BOX */
+        .review-side { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .review-side h3 { font-family: 'Playfair Display'; margin-bottom: 20px; font-size: 1.8rem; }
+        
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+        textarea { height: 150px; resize: none; }
+
+        .submit-btn { 
+            background: var(--primary); color: white; border: none; padding: 15px 30px; 
+            border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s;
+        }
+        .submit-btn:hover { background: var(--accent); }
+
+        @media (max-width: 768px) { .contact-container { grid-template-columns: 1fr; gap: 40px; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="infinite.html" class="logo">AURA.</a>
+        <a href="infinite.html" style="text-decoration:none; color:black; font-weight:600;">← Back</a>
+    </nav>
+
+    <div class="contact-container">
+        <!-- ADDRESS & INFO -->
+        <div class="info-side">
+            <h2>Visit Our Sanctuary</h2>
+            
+            <div class="info-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                    <h4>Address</h4>
+                    <p>Near Nehru circle, Opp. Reliance Jio mart,<br>Adarsh nagar, Jaipur 300125</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                    <h4>Email Us</h4>
+                    <p>Infinite@gmail.com</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                    <h4>Call Us</h4>
+                    <p>+91 703245xxxx</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <i class="fa-solid fa-clock"></i>
+                <div>
+                    <h4>Opening Hours</h4>
+                    <p>Monday to Saturday<br>9:00 AM - 10:00 PM</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- REVIEW FORM -->
+        <div class="review-side">
+            <h3>Leave a Review</h3>
+            <form id="reviewForm">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="reviewerName" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Experience</label>
+                    <textarea id="reviewerText" placeholder="How was your coffee today?" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Post to Stories</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Logic to save review
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('reviewerName').value;
+            const text = document.getElementById('reviewerText').value;
+
+            // 1. Get existing reviews from LocalStorage
+            const reviews = JSON.parse(localStorage.getItem('cafe_reviews')) || [];
+
+            // 2. Add new review
+            reviews.unshift({ name, text }); // Adds to start so it shows first
+
+            // 3. Save back to LocalStorage
+            localStorage.setItem('cafe_reviews', JSON.stringify(reviews));
+
+            alert("Thank you! Your review is now live on our Stories page.");
+            this.reset();
+            window.location.href = "infinite.html#stories"; // Go back to home stories
+        });
+    </script>
+</body>
+</html>
