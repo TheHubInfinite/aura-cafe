@@ -1,7 +1,9 @@
 // 1. MOBILE MENU TOGGLE
 function toggleMenu() {
     const mobileNav = document.getElementById('mobileNav');
-    mobileNav.classList.toggle('active');
+    if (mobileNav) {
+        mobileNav.classList.toggle('active');
+    }
 }
 
 // 2. PRODUCT DATA
