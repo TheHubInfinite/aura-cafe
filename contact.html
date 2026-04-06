@@ -44,7 +44,18 @@
         }
         .submit-btn:hover { background: var(--accent); }
 
-        @media (max-width: 768px) { .contact-container { grid-template-columns: 1fr; gap: 40px; } }
+        @media (max-width: 768px) {
+    .contact-container { 
+        width: 90%; 
+        margin: 40px auto; 
+        grid-template-columns: 1fr; 
+        gap: 40px; 
+    }
+    .info-side h2 { font-size: 2rem; }
+    .review-side { padding: 25px; } /* More space for the form */
+    
+    nav { padding: 15px 5%; }
+}
     </style>
 </head>
 <body>
@@ -128,7 +139,7 @@
 
             alert("Thank you! Your review is now live on our Stories page.");
             this.reset();
-            window.location.href = "infinite.html#stories"; // Go back to home stories
+            window.location.href = "index.html#stories"; // Go back to home stories
         });
     </script>
 </body>
